@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="console.log(/html; charset=UTF-8">
+    <title>Rock - Paper - Scissors GAME</title>
+  </head>
+  <body>
+     <script>
+        /* set up the loop */ 
+        const maxGames = 5;
+        let gameScoreCounterPlayer = 0;
+        let gameScoreCounterComputer = 0;
+        let gameScoreCounterNeutral = 0;
+
+        for (var gameCounter = 0;gameCounter < maxGames;gameCounter++) {
+
+        /* declare the function for the player selection */
+
+          function playerSelect() {
+			let playerChoice = window.prompt("Please enter either Rock, Paper or Scissors.");
+            let playerSelection = playerChoice.toLowerCase();
+            return playerSelection;
+          }
+
+    	 /* declare the function for the computer selection */
+
+          function computerSelect() {
+			    var computerPlay = [
+                "rock",
+                "paper",
+                "scissors"
+            ];
+            var computerSelection = computerPlay[Math.floor(Math.random()*computerPlay.length)];
+            return computerSelection;
+          }
+          
+          let playerInput = playerSelect();
+          let computerInput = computerSelect();
+
+          console.log(playerInput);
+          console.log(computerInput);
+
+        function keepScore(playerInput,computerInput) {
+
+          if (playerInput == "rock" && computerInput == "paper") {
+              gameScoreCounterComputer++;
+              return "Computer won: " + gameScoreCounterComputer;
+          } else if (playerInput == "rock" && computerInput == "scissors") {
+              gameScoreCounterPlayer++;
+              return "Player won: " + gameScoreCounterPlayer;
+          } else if (playerInput == "paper" && computerInput == "rock") {
+              gameScoreCounterPlayer++;
+              return "Player won: " + gameScoreCounterPlayer;
+          } else if (playerInput == "paper" && computerInput == "scissors") {
+              gameScoreCounterComputer++;
+              return "Computer won: " + gameScoreCounterComputer;
+          } else if (playerInput == "scissors" && computerInput == "paper") {
+              gameScoreCounterPlayer++;
+              return "Player won: " + gameScoreCounterPlayer;
+          } else if (playerInput == "scissors" && computerInput == "rock") {
+              gameScoreCounterComputer++;
+              return "Computer won: " + gameScoreCounterComputer;
+          } else {
+              gameScoreCounterNeutral++;
+              return "It's a tie.";
+          }
+
+        }
+
+        console.log(keepScore(playerInput,computerInput));
+
+        }
+    function finalScore() {
+        if (gameScoreCounterPlayer > gameScoreCounterComputer) {
+            return "Player won: " + gameScoreCounterPlayer + " total score.";
+        } else if (gameScoreCounterPlayer < gameScoreCounterComputer) {
+            return "Computer won: " + gameScoreCounterComputer + " total score."; 
+        } else {
+            return "It's a tie. Player score: " + gameScoreCounterPlayer + ", computer score: " + gameScoreCounterComputer + ".";
+        }
+    }
+
+    console.log(finalScore(gameScoreCounterPlayer,gameScoreCounterComputer))
+
+    </script>
+  </body>
+</html>
