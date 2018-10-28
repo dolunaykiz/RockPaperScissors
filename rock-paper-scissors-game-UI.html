@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="console.log(/html; charset=UTF-8">
+    <title>Rock - Paper - Scissors GAME</title>
+    <style>
+        #btn-rock {
+            border-radius: 4px;
+            background-color: yellowgreen;
+            border: none;
+            padding: 15px 32px;
+            font-size: 16px;
+        }
+        #btn-paper {
+            border-radius: 4px; 
+            background-color: teal;
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            font-size: 16px;
+        }
+        #btn-scissors {
+            border-radius: 4px; 
+            background-color: thistle;
+            border: none;
+            padding: 15px 32px;
+            font-size: 16px;
+        }
+    </style>
+  </head>
+  <body>
+     <div id="container">
+        <div id="header">
+            <h1>Rock - Paper - Scissors</h1>
+        </div>
+        <div>
+            <h2>Please select a button below to play.</h2>
+        </div>
+        <div id="player-buttons">
+            <button id="btn-rock">Rock</button>
+            <button id="btn-paper">Paper</button>
+            <button id="btn-scissors">Scissors</button>
+        </div>
+        <div id="current-round">
+            <p id="current-status"></p>
+        </div>
+        <div id="game-over">
+            <p id="game-total"></p>
+        </div>
+     </div>
+     <script>
+        let gameScoreCounterPlayer = 0;
+        let gameScoreCounterComputer = 0;
+        let gameRoundCounterTotal = 0;
+
+    	 /* declare the function for the computer selection */
+
+        function getRandomInt (min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+            }
+
+        function computerSelect() {
+                switch (getRandomInt(1, 3))
+                {
+                case 1:
+                    return "rock";
+                case 2:
+                    return "paper";
+                case 3:
+                    return "scissors";
+                }
+            }
+
+        const buttons = document.querySelectorAll('button');
+
+        function resetCounters () {
+            gameScoreCounterPlayer = 0;
+            gameScoreCounterComputer = 0;
+            gameRoundCounterTotal = 0;
+        }
+
+        buttons.forEach((button) => {
+
+        // and for each one we add a 'click' listener
+            button.addEventListener('click', (btnEvent) => {
+
+                let currentStatus = document.getElementById("current-status");
+                let gameWinner =  document.getElementById("game-total");
+
+                if (gameRoundCounterTotal == 0) {
+                    gameWinner.textContent = "";
+                }
+
+                gameRoundCounterTotal ++;
+
+                let computerPlay = computerSelect();
+
+                if (btnEvent.target.id == "btn-rock" && computerPlay == "paper" || 
+                    btnEvent.target.id == "btn-paper" && computerPlay == "scissors" || 
+                    btnEvent.target.id == "btn-scissors" && computerPlay == "rock") {
+                    gameScoreCounterComputer ++;
+                    currentStatus.textContent = "Computer wins: " + gameScoreCounterComputer + "."
+                    + " Total rounds played: " + gameRoundCounterTotal + "." + " Player so far has won: " 
+                    + gameScoreCounterPlayer + "." + " Computer so far has won: " + gameScoreCounterComputer + ".";
+                } else if (btnEvent.target.id == "btn-rock" && computerPlay == "scissors" || 
+                    btnEvent.target.id == "btn-paper" && computerPlay == "rock" ||
+                    btnEvent.target.id == "btn-scissors" && computerPlay == "paper") {
+                    gameScoreCounterPlayer ++;
+                    currentStatus.textContent = "Player wins: " + gameScoreCounterPlayer + "."
+                    + " Total rounds played: " + gameRoundCounterTotal + "." + " Player so far has won: " 
+                    + gameScoreCounterPlayer + "." + " Computer so far has won: " + gameScoreCounterComputer + ".";
+                } else {
+                    currentStatus.textContent = "It's a tie." + " Total rounds played: " + gameRoundCounterTotal + "." 
+                    + " Player so far has won: " + gameScoreCounterPlayer + "." + " Computer so far has won: " 
+                    + gameScoreCounterComputer + ".";
+                }
+
+                if (gameScoreCounterComputer == 5 ) {
+                    gameWinner.textContent = "Computer wins game: " + gameScoreCounterComputer + ".";
+                    resetCounters();
+                } else if (gameScoreCounterPlayer == 5) {
+                    gameWinner.textContent = "Player wins game: " + gameScoreCounterPlayer + ".";
+                    resetCounters();
+                }
+
+            });
+        });
+
+    </script>
+  </body>
+</html>
